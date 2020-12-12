@@ -1,55 +1,63 @@
-class Food{
+class Food {
     constructor(){
-        this.foodStock=0;
-        this.lastFed;
+    this.foodStock=0;
+    this.lastFed;
+    this.image=loadImage('Images/Milk.png');
     }
 
-getFoodStock() {
-        /*var FoodRef  = database.ref('Food');
-    FoodRef.on("value",function(data){
-       foodStock = data.val();*/
-       return this.foodStock
-}
-updateFoodStock(foodStock) {
-    this.foodStock=foodStock
+   updateFoodStock(foodStock){
+    this.foodStock=foodStock;
+   }
+
+   getFedTime(lastFed){
+     this.lastFed=lastFed;
+   }
+
+   deductFood(){
+     if(this.foodStock>0){
+      this.foodStock=this.foodStock-1;
+     }
     }
 
-deductFood() {
-    if(this.foodStock>0){
-        this.foodStock=this.foodStock-1
-        
-      }
-    }
-
-    getFedTime(lastFed){
-        this.lastFed=this.lastFed
+    getFoodStock(){
+      return this.foodStock;
     }
 
     display(){
-        var x=80,y=100
-        rectMode (CENTER)
-        rect(720,220,70,70)
-        if (this.foodStock!=0) {
-            for (var i =0 ;i <this.foodStock;i++){
-                if (i%10==0) {
-                    x=80
-                    y=y+50
-                } 
-                rect(x,y,50,50)
-                x=x+30          
-            }
+        background(46,139,87);
+
+        fill(255,255,254);
+        textSize(15);
+        if(lastFed>=12){
+            text("Last Feed : "+ lastFed%12 + " PM", 50,30);
+        }else if(lastFed==0){
+            text("Last Feed : 12 AM",50,30);
+        }else{
+            text("Last Feed : "+ lastFed + " AM", 50,30);
         }
+        var x=70,y=100; 
+        imageMode(CENTER);
+        if(this.foodStock!=0){
+        for(var i=0;i<this.foodStock;i++){
+          if(i%10==0){
+            x=70;
+            y=y+50;
+          }
+          image(this.image,x,y,50,50);
+          x=x+30;
+        }
+      }
     }
 
-bedroom(){
-    background(bedroom,550,550)
-}
+    bedroom(){
+        background(bedroom,550,500);  
+    }
+      
+    garden(){
+        background(garden,550,500);  
+    } 
 
-garden(){
-    background(garden,550,550)
-}
-
-bathroom(){
-    background(bathroom,550,550)
-}
+    washroom(){
+        background(washroom,550,500); 
+    }
 }
